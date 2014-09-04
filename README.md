@@ -1,11 +1,11 @@
-concetto12
-==========
+Concetto 2012
+=============
 
 Website for Concetto 2012. `marioworld.js` is the core JavaScript file that creates the world.
 
 There is an error in the preloaded in `index.html`. Use `home.html` to view the homepage.
 
-Mario and all other characters used in this website are copyright of Nintendo. This code is not intended for any commercial or non-commercial use. Please do not re-use
+Mario and all other characters used in this website are copyright of Nintendo. This code is not intended for any commercial or non-commercial use. Please do not re-use.
 And please do not sue me.
 
 Screenshots
