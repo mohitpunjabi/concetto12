@@ -1,0 +1,400 @@
+/**
+ *
+ *	Mario World:
+ *	written by Mohit Punjabi
+ *
+ **/
+
+#mario, #mario-right
+{
+	position: absolute;
+	z-index: 9;
+}
+
+#mario
+{
+	background: url(../img/mario-sprite.png) no-repeat;
+}
+
+#mario-right
+{
+	background: url(../img/mario-right-sprite.png) no-repeat;
+}
+#mario.stand, #mario-right.stand
+{
+	background-position: -58 0;
+}
+
+#mario.air, #mario-right.air
+{
+	background-position: -295 0;
+}
+
+#mario.move, #mario-right.move
+{
+	background-position: -150 0;
+}
+
+#mario.sit, #mario-right.sit
+{
+	background-position: -10 0;
+}
+
+.wall, .brick
+{
+	z-index: 9;
+}
+
+.tunnel
+{
+	z-index: 10;
+}
+
+.brick1, .brick2, .brick3, .brick4, .brick5, .brick6
+{
+	-webkit-transition: top 0.1s linear;
+	-moz-transition: top 0.1s linear;
+	-o-transition: top 0.1s linear;
+	transition: top 0.1s linear;
+	background-position: 0 0;
+}
+
+.brick1
+{
+	background: url(../img/brick1.png) 0 0;
+}
+
+.brick2
+{
+	background: url(../img/brick2.png) 0 0;
+}
+
+.brick3
+{
+	background: url(../img/brick3.png) 0 0;
+}
+
+.brick4
+{
+	background: url(../img/brick4.png) 0 0;
+}
+
+.brick5
+{
+	background: url(../img/brick5.png) 0 0;
+}
+
+.brick6
+{
+	background: url(../img/brick6.png) 0 0;
+}
+.brick7
+{
+	background: url(../img/brick7.png) 0 0 repeat-x;
+}
+
+
+
+.brickpiece2
+{
+	width: 16px;
+	height: 17px;
+	background: url(../img/brickpiece2.png) 0 0 no-repeat;
+}
+.brickpiece4
+{
+	width: 16px;
+	height: 17px;
+	background: url(../img/brickpiece4.png) 0 0 no-repeat;
+}
+
+.wall1
+{
+	background: url(../img/brick2.png) 0 0;
+}
+
+.wall2
+{
+	background: url(../img/brick3.png) 0 0;
+}
+
+.wall3
+{
+	background: url(../img/brick4.png) 0 0;
+}
+
+.wall4
+{
+	background: url(../img/brick5.png) 0 0;
+}
+
+.wall5
+{
+	background: url(../img/ground1.png) 0 0;
+}
+
+.wall6
+{
+	background: url(../img/ground2.png) 0 0;
+}
+.wall7
+{
+	background: url(../img/brick7.png) 0 0 repeat-x;
+}
+#water
+{
+	background: url(../img/water.png) 0 0 repeat-x;
+}
+
+
+.tunnel
+{
+	background: url(../img/tunneltop.png) 0 0 no-repeat, url(../img/tunnel.png) center repeat-y;
+}
+
+.island .islandleft
+{
+	width: 32px;
+	height: 34px;
+	left: 0px;
+	top: 0px;
+	background: url(../img/islandleft.png) no-repeat;
+}
+.island .islandright
+{
+	position: absolute;
+	width: 32px;
+	height: 34px;
+	right: 0px;
+	top: 0px;
+	background: url(../img/islandright.png) no-repeat;
+}
+.island .islandbase
+{
+	position: absolute;
+	left: 32px;
+	top: 0px;
+	background: url(../img/islandbase.png);
+}
+.island .islandtop
+{
+	position: absolute;
+	height: 34px;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	background: url(../img/islandtop.png);
+}
+
+.coin
+{
+	width: 32px;
+	background: url(../img/coin1.png) 0 0 no-repeat;
+}
+
+.background .cloud1
+{
+	left: -20%;
+	width: 100px;
+	height: 52px;
+	background: url(../img/cloud1.png) 0 0 no-repeat;
+}
+.background .cloud2
+{
+	left: -20%;
+	width: 64px;
+	height: 52px;
+	background: url(../img/cloud2.png) 0 0 no-repeat;
+}
+
+.background .tree
+{
+	width: 68px;
+	height: 99px;
+	background: url(../img/tree.png) no-repeat;	
+}
+
+.background .fence
+{
+	width: 129px;
+	height: 34px;
+	background: url(../img/fence.png) no-repeat;	
+}
+
+.background .bush1
+{
+	width: 98px;
+	height: 41px;
+	background: url(../img/bush1.png) no-repeat;	
+}
+
+.background .bush2
+{
+	width: 128px;
+	height: 34px;
+	background: url(../img/bush2.png) no-repeat;	
+}
+
+.background .bush3
+{
+	width: 160px;
+	height: 75px;
+	background: url(../img/bush3.png) no-repeat;	
+}
+
+
+#container
+{
+	overflow: hidden;
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 600px;
+	top: 0px;
+}
+
+#mario-container
+{
+	min-height: 635px;
+	max-height: 800px;
+	min-width: 1000px;
+	overflow: hidden;
+	position: absolute;
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+	bottom: 0px;
+	left: 0px;
+	font-family: mario, "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	color: #D6D6D6;
+}
+
+@font-face
+{
+	font-family: mario;
+	src: url('brandish.ttf') format("truetype"); /* IE */
+}
+
+
+.fireball
+{
+	background: url(../img/fireball.png) no-repeat;
+	background-position: 100px 0px;
+	width: 34px;
+	height: 34px;
+}
+
+.goomba1
+{
+	background: url(../img/goomba1.png) 0 0 no-repeat;
+	z-index: 6;
+}
+
+.goomba2
+{
+	background: url(../img/goomba2.png) 0 0 no-repeat;
+	z-index: 6;
+}
+
+.star
+{
+	background: url(../img/star.png) 0 0 no-repeat;
+	z-index: 7;
+}
+
+.fish
+{
+	background: url(../img/fish.png) 0 0 no-repeat;
+	z-index: 13;
+}
+
+.abs
+{
+	position: absolute;
+}
+
+.emptyDiv
+{
+	z-index: 5;
+}
+
+
+
+table.bubble td.top#left
+{
+	background: url(../img/bubble.png) no-repeat;
+	background-position: 0px 0px;
+	width: 10px;
+	height: 8px;
+}
+
+table.bubble td.top#right
+{
+	background: url(../img/bubble.png) no-repeat;
+	background-position: -38px 0px;
+	width: 15px;
+	height: 8px;
+}
+
+table.bubble td.text
+{
+	background: #FFFFFF;
+	border-left: 2px #000000 solid;
+	border-right: 2px #000000 solid;
+	padding: 5px 20px 5px 20px;
+	width: 200px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	text-align: center;
+	font-size: 0.75em;
+	color: #000;
+}
+
+table.bubble td.bottom#left
+{
+	background: url(../img/bubble.png);
+	background-position: 0px -8px;
+	width: 10px;
+	height: 8px;
+}
+
+table.bubble td.bottom#center
+{
+	background-color: #FFF;
+	border-bottom: 2px #000000 solid;
+	width: 70px;
+	height: 8px;
+}
+
+table.bubble td.bottom#right
+{
+	background: url(../img/bubble.png);
+	background-position: -38px -8px;
+	width: 15px;
+	height: 8px;
+}
+
+
+table.bubble td.top#center
+{
+	border-top: 2px #000000 solid;
+	background: #FFF;
+	height: 8px;
+}
+
+table.bubble td.arrow
+{
+	background: url(../img/bubble.png);
+	background-position: -15px -15px;
+	width: 21px;
+	height: 12px;
+}
+
+#bubbleContainer
+{
+	z-index: 12;
+	position: absolute;
+	bottom: 70px;
+	left: -70px;
+	width: 200px;
+}

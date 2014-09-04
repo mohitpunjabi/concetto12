@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Concetto</title>
+<link rel="stylesheet" type="text/css" href="css/iframe-style.css" />
+<link href="css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+
+<!--[if IE]>
+
+<style type="text/css">
+body
+{
+ background: url(img/dark-grid.png);
+}
+</style>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"> </script>
+<script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="js/jquery.mCustomScrollbar.min.js"></script>
+<script type="text/javascript" src="js/scrollbar-script.js"></script>
+
+</head>
+
+<body>
+<div id="backButton">
+<a href="coding.html">Back</a>
+</div>
+
+<h1>Ramanujan Programming Contest</h1>
+<div id="container">
+
+<h3>Can you compute the 10001<sup>st</sup> prime number?<br />
+Or Find the sum of digits of 2<sup>100</sup>?</h3>
+<p>
+A programming contest inspired by Ramanujan and his love for numbers and equations. The contest
+will be based on mathematical puzzles, famous equations, recurrence relations, number games
+etc. No perquisite knowledge in pure mathematics is required. Questions will be simple, logical
+and anyone who has fascination for puzzles can participate. Knowledge of any one programming
+language is required.
+</p>
+
+<h2>Rules and Regulations</h2>
+<ol type=1>
+	<li>C/C++, Java are the only programming languages to be used for programming.
+	<li>Only one round will take place.
+	<li>If answers of the two persons clashes then the preference will be given to those who have shorter code, good algorithm and less executable time.
+	<li>A set of six mathematical/computer programming challenges will be provided to you at the start of the competition.
+	<li>Time for solving will be decided on the venue.
+	<li>Solution to all those challenges need to be submitted before the time is up. 
+	<li>The correct answer should be displayed by running the program.
+	<li>Multiple use of language is not allowed.
+	<li>Answers corrected to two places of decimal shall only be accepted.
+</ol>
+</p>
+
+<h2>Tutorial</h2>
+<p>The Fibonacci sequence is defined by the recurrence relation:<br />
+<br />
+F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub>, where F<sub>1</sub> = 1 and F<sub>2</sub> = 1.
+
+Hence the first 12 terms will be:<br />
+F<sub>1</sub> = 1<br />
+F<sub>2</sub> = 1<br />
+F<sub>3</sub> = 2<br />
+F<sub>4</sub> = 3<br />
+F<sub>5</sub> = 5<br />
+F<sub>6</sub> = 8<br />
+F<sub>7</sub> = 13<br />
+F<sub>8</sub> = 21<br />
+F<sub>9</sub> = 34<br />
+F<sub>10</sub> = 55<br />
+F<sub>11</sub> = 89<br />
+F<sub>12</sub> = 144
+</p>
+
+
+<p>
+The 12th term, F12, is the first term to contain three digits.<br />
+What is the first term in the Fibonacci sequence to contain 1000 digits?
+</p>
+
+<h3>Solution</h3>
+<code>
+<pre style="padding-left: 100px">
+//code to find the sum of the digits of 2 raised to the power of 1000
+
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int main()
+{
+    vector<int> power;
+    power.push_back(1);
+    int n=0,x=0;
+    int a=0;
+    for(int j=1;j<1000;j++)
+    {
+	// the vector power stores the digits of 2^n which are used one by one to calculate 2^(n+1)
+        for(int i=0;i&lt;power.size();i++)
+        {
+            n=(power[i]*2)+x;	// n finds the double of a digit added to some left over after
+            doubling previous digit if any
+            x=0;
+            if(n&lt;10)
+            {
+            	// u use the same position because you cannot leave the digits
+                // of previous numbers stored in the array,u have to somehow remove them
+                power[i]=n;
+            }
+            
+            // u have to separate the digits if a double digit number is to be stored
+            if(n&gt;=10)
+            {
+                power[i]=n%10;
+                x=n/10;
+            }
+        }
+        
+        //at times like 64, here 64*2=128 u have to create a new position
+        if(x&gt;0)
+        {
+        	power.push_back(x);
+        }
+        x=0;
+    }
+    for(int i=0;i&lt;power.size();i++)
+    	a=a+power[i];	//add all the digits
+    a--;
+    cout&lt;&lt;"\n"&lt;&lt;a;
+    cin&gt;&gt;n;
+}
+
+</pre>
+</code>
+
+<h2>Contact</h2>
+<p>
+Viraj Swaroop<br />
+9934193405<br />
+<br />
+Abhishek Pasari<br />
+9006482050<br />
+<br />
+<br />
+
+</p>
+
+
+</div>
+<script type="text/javascript">
+</script>
+</body>
+</html>

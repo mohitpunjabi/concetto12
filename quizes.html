@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Concetto</title>
+<link rel="stylesheet" type="text/css" href="css/iframe-style.css" />
+
+<!--[if IE]>
+
+<style type="text/css">
+body
+{
+	background: url(img/dark-grid.png);
+}
+</style>
+
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"> </script>
+<script type="text/javascript">
+var curr = 0;
+var total = 3;
+var elemWidth;
+$(document).ready(function() {
+	var heads = document.getElementsByTagName('h1');
+	var h = heads[0];
+	var hnew = "";
+	for(var i = 0; i < h.innerHTML.length; i++)
+		hnew += "<span>"+h.innerHTML.charAt(i)+"</span>";
+	h.innerHTML = hnew;
+	glowText(0);
+	
+	showTiles(0);
+});
+
+function showTiles(curr)
+{
+	if(curr < $(".tiles li").length)
+	{
+		$(".tiles li:eq("+curr+")").fadeIn(2500);
+		setTimeout("showTiles("+(curr+1)+")", 200);
+	}
+}
+
+function glowText(i)
+{
+	var l = $('h1 span').length;
+	$('h1 span:eq('+((i + l - 3)%l)+')').attr('class', '');
+	$('h1 span:eq('+(i-2)+')').attr('class', 'glow');
+	$('h1 span:eq('+(i-1)+')').attr('class', 'glow');
+	$('h1 span:eq('+(i)+')').attr('class', 'glow');
+	setTimeout("glowText("+((i+1)%(l+6))+")", 125);
+}
+</script>
+
+</head>
+
+<body>
+<h1>Quizzes</h1>
+<div id="container">
+
+<ul class="tiles">
+    <li>
+    <a href="generalquiz.html">General Quiz</a>
+    </li>
+</ul>
+<br />
+<br />
+<br />
+<br />
+
+<h2 style="padding: 20px; margin: 0"><a href="braingles.html">Braingles</a></h2>
+
+<ul class="tiles" style="padding: 0px 50px; margin: 0">
+<li>
+<a href="techspade.html">Techspade</a>
+</li>
+
+<li>
+<a href="elektro-quiz.html">Elektro Quiz</a>
+</li>
+
+<li>
+<a href="techquizzard.html">Tech Quizzard</a>
+</li>
+
+<li>
+<a href="mineargeo.html">Mineargeo</a>
+</li>
+
+<li>
+<a href="earthanveshan.html" style="font-size: 20px">Earthanveshan</a>
+</li>
+
+
+<li>
+<a href="quizzypet.html">Quizzypet</a>
+</li>
+
+<li>
+<a href="terraquest.html">Terraquest</a>
+</li>
+
+<li>
+<a href="equiz.html">E-Quiz</a>
+</li>
+</ul>
+
+
+<br /><br /><br /><br />
+</div>
+</body>
+</html>

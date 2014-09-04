@@ -1,0 +1,75 @@
+@charset "utf-8";
+
+
+.background, #container
+{
+	background-color: #8484FF;
+}
+
+#mario-container
+{
+	height: 100%;
+	width: 4750px;
+}
+
+#mario-container a
+{
+	color: #FFF;
+	text-decoration: none;
+	padding: 10px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 3px #FFF;
+	border: 1px #DDD solid;
+	background: rgba(255, 255, 255, 0.2);
+	text-shadow: 2px 2px 0px #000;
+}
+
+#mario-container a:hover
+{
+	color: #FFF;
+	box-shadow: 0px 0px 15px #FFF;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+#memoriesScreen
+{
+	opacity: 0.8;
+	border: 10px #000 solid;
+	background-color: #000;
+}
+
+#sponsorsScreen
+{
+	background: url(../img/sponsorscreen.png) center top no-repeat;
+}
+
+#sponsorsImage
+{
+	width: 300px;
+	position: absolute;
+	text-aling: center;
+	width: 100%;
+	height: 130px;
+	bottom: 65px;
+}
+#sponsorsImage img
+{
+	display: inline-block;
+	height: 100%;
+	padding: 10px;
+	width: 150px;
+}
+
+#mario-container a.blacklink
+{
+	color: #00F;
+	border: 0;
+	display: inline;
+	padding: inherit;
+	text-shadow: none;
+}
+
+#mario-container a.blacklink:hover
+{
+	text-decoration: underline;
+}

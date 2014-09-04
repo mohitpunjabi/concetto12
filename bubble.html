@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>JavaScript Unleashed</title>
+</head>
+<body>
+
+<audio id="multiaudio1" src="sound/smb_background.mid" preload="auto"></audio>
+<audio id="1-up" src="sound/smb_1-up.wav" preload="auto"></audio>
+<audio id="coin" src="sound/smb_coin.wav" preload="auto"></audio>
+<audio id="breakblock" src="sound/smb_breakblock.wav" preload="auto"></audio>
+<audio id="fireworks" src="sound/smb_fireworks.wav" preload="auto"></audio>
+<audio id="jump-super" src="sound/smb_jump-super.wav" preload="auto"></audio>
+<audio id="pipe" src="sound/smb_pipe.wav" preload="auto"></audio>
+<audio id="mariodie" src="sound/smb_mariodie.wav" preload="auto"></audio>
+<audio id="gameover" src="sound/smb_gameover.wav" preload="auto"></audio>
+
+<a href="javascript:play_multi_sound('coin');">Coin</a><br />
+<a href="javascript:play_multi_sound('breakblock');">Break Block</a><br />
+<a href="javascript:play_multi_sound('fireworks');">Fireworks</a><br />
+<a href="javascript:play_multi_sound('pipe');">Pipe</a><br />
+<a href="javascript:play_multi_sound('gameover');">Gameover</a><br />
+<a href="javascript:play_multi_sound('1-up');">1 Up</a><br />
+<a href="javascript:play_multi_sound('jump-super');">Jump</a><br />
+
+<script type="text/javascript">
+	var channel_max = 5;										// number of channels
+	audiochannels = new Array();
+	for (a=0;a<channel_max;a++) {									// prepare the channels
+		audiochannels[a] = new Array();
+		audiochannels[a]['channel'] = new Audio();						// create a new audio object
+		audiochannels[a]['finished'] = -1;							// expected end time for this channel
+	}
+	function play_multi_sound(s) {
+		for (a=0;a<audiochannels.length;a++) {
+			thistime = new Date();
+			if (audiochannels[a]['finished'] < thistime.getTime()) {			// is this channel finished?
+				audiochannels[a]['finished'] = thistime.getTime() + document.getElementById(s).duration*1000;
+				audiochannels[a]['channel'].src = document.getElementById(s).src;
+				audiochannels[a]['channel'].load();
+				audiochannels[a]['channel'].play();
+				break;
+			}
+		}
+	}
+</script>
+
+
+</body>
+</html>

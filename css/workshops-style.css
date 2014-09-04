@@ -1,0 +1,33 @@
+/**
+ *
+ *	Mario World:
+ *	written by Mohit Punjabi
+ *
+ **/
+
+@charset "utf-8";
+
+
+.background, #container
+{
+	background-color: #000000;
+}
+
+#mario-container
+{
+	height: 100%;
+	width: 100%;
+}
+
+#eventsHead
+{
+	font-size: 150px;
+	text-shadow: 5px 5px #BBB;
+	color: #FFF;
+}
+
+.desc
+{
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 3px;
+}

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset=utf-8 />
+<title>Snap Bird</title>
+<link href='/m/snapbird-icon.png' rel='apple-touch-icon' />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta content='True' name='HandheldFriendly' />
+<link rel="apple-touch-icon" href="/images/snapbird-icon.png" />
+<meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' />
+<style>
+body { 
+  -webkit-user-select:none;
+  font-family: helvetica;
+  margin: 0;
+  background: #999;
+}
+
+form {
+  position: absolute;
+}
+
+input, select {
+  font-size: 18px;
+}
+
+a {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+  color: rgb(35, 119, 187);
+  text-decoration: none;
+}
+
+a img {
+  border: 0;
+}
+
+h1 {
+  font-size: 34px;
+  font-weight: bold;
+  color: #1984BB;
+  font-family: verdana;
+  margin: 0;
+}
+
+h1 img {
+  vertical-align: middle;
+  height: 42px;
+  margin-right: 10px;
+}
+
+.list-tweet-img {
+  float: left;
+  height: 2em;
+  padding-bottom: 0.4em;
+  padding-right: 0.8em;
+  width: 2em;
+}
+
+.inner-w-img {
+/*  margin-left: 2.8em;*/
+}
+
+.status {
+  word-wrap: break-word;
+}
+
+.list-tweet-status .status_link, .list-tweet-status .source, .list-tweet-status .text, .retweet-info .status_link, .retweet-info .source, .retweet-info .text {
+  font-style: normal; font-size: .8em; color: #777; text-decoration: none; float: left; min-height: 15px; padding-top: .3em;
+}
+
+
+.list-tweet {
+  border-top: 1px dotted rgb(204, 204, 204);
+  clear: both;
+  float: none;
+  font-weight: normal;
+  overflow: hidden;
+  padding: 0.8em 0px;
+}
+
+.list-firsttweet {
+  border-top: none;
+}
+
+#settings {
+/*  display: none;*/
+  width: 100%;
+  left: 0;
+  top: 0;
+/*  top: -162px;*/
+  height: 481px;
+  background: url(/images/bg-top.gif) repeat-x transparent left top; 
+}
+
+#settings > div {
+  margin: 10px;
+  position: relative;
+}
+
+#term, select, #search {
+  width: 46%;
+}
+
+/* iscroll styles */
+#results {
+  border-top: 1px solid #629997;
+	background: #999;
+	position: relative;	/* needed */
+/*  float:left;*/
+	z-index: 1;
+  overflow: hidden;
+	padding: 0;
+  margin-top: 150px;
+}
+
+#results-inner {
+  background: rgb(176, 211, 73) url(/images/bg-bottom.gif) repeat-x left top;
+  float: left;
+  width: 100%;
+}
+
+#content {
+  -webkit-border-radius: 5px;
+  padding: 0 10px;
+  margin: 10px;
+  background: #fff;
+}
+
+body.portrait #results {
+  min-height: 355px;
+  height: 355px;
+}
+
+body.fullscreen #results {
+  min-height: 400px;
+  height: 400px;
+}
+
+body.landscape #results {
+  min-height: 200px;
+  height: 200px;
+}
+
+input[type=submit] {
+	display: inline-block;
+	margin: 0 auto;
+	text-align:center;
+	line-height: 32px; /* will keep the text vertically
+	                     centered on the 46px high button */				
+
+	/* Font styling */
+	font-family: Helvetica;
+	font-weight: bold;
+	font-size: 18px;
+	text-decoration: none;
+	background: transparent;
+	color: #fff;
+  text-shadow: rgba(0, 0, 0, 0.796875) 0px 0px 2px;
+	/* Button image is 29px wide.
+		14px for the left part of the button
+		14px for the right
+		1px for the middle
+	*/
+	border-width: 0 14px 0 14px;
+	-webkit-border-image: url(/images/button2.png) 0 14 0 14;
+}
+
+.more {
+  border-top: 2px solid #CCCCCC;
+}
+
+</style>
+</head>
+<body class="results">
+<form id="settings">
+  <h1><img src="/images/snapbird-icon.png" />Snap Bird</h1>
+<div><input type="text" name="term" id="term" size="18" placeholder="search user" /> <select id="type" name="type">
+  <option value="timeline">timeline</option>
+  <option value="favs">favs</option>
+  <option value="friends">friend&rsquo;s tweets</option>
+</select></div>
+<div><input type="text" id="search" name="search" size="18" placeholder="find something..." /> <input type="submit" value="search"></div>
+</form>
+<div id="results">
+  <div id="results-inner">
+    <div id="content">
+      <div><p>RE-FINDING THE ONES THAT GOT AWAY</p></div>
+    </div>
+  </div>
+</div>
+<script src="/m/js/xui-core-1.0.0.js"></script>
+<script src="/m/js/iscroll.js"></script>
+<script src="../twitterlib/twitterlib.js"></script>
+<script>
+// because sometimes we need to execute once on init and use again later
+Function.prototype.runReturn = function () {
+  this.call();
+  return this;
+};
+
+var store = (function () {
+  var useStorage = !!window.localStorage;
+  
+  return {
+    get: function (key) {
+      var value, ca, c, i;
+
+      if (useStorage) {
+        value = window.localStorage.getItem(key);
+      } else {
+        ca = document.cookie.split(';');
+        for (i=0; i < ca.length; i++) {
+          c = ca[i];
+          while (c.charAt(0)==' ') {
+            c = c.substring(1, c.length);
+          }
+          if (c && c.indexOf(key) == 0) {
+            value = c.substring(key.length,c.length);
+            break;
+          }
+        }
+      }
+
+      if (value == null) {
+        value == "";
+      }
+
+      return value;
+    },
+    set: function (key, value) {
+      if (useStorage) {
+        try {
+          window.localStorage.setItem(key, value);
+        } catch (e) {
+          // could be a QUOTA_EXCEEDED_ERR (for some reason Webkit is giving me this, just needs a restart and it goes away...)
+        }
+      } else {
+        document.cookie = key + "=" + value + "; path=/";
+      }      
+    }
+  };
+})();
+
+
+(function ($) {
+  window.$ = $;
+  
+  var $tweets = $('#content'), 
+      screen_name = url = state = '', 
+      page = 1, 
+      total_tweets = 0, 
+      total_searched = 0,
+      statusTop = null, 
+      type_string = { 
+        timeline : 'tweets', 
+        favs: 'favourites', 
+        withfriends: 'friends&rsquo; tweets', 
+        list: 'member tweets' 
+      };
+
+  twitterlib.custom('withfriends', '/friends.php?');
+  
+  twitterlib.render = function (tweet, first, hard) {
+    var html = [], screen_name = tweet.user.screen_name;
+    html.push('<div class="list-tweet' + (first ? ' list-firsttweet' : ''));
+    if (hard) html.push(' hard');
+    html.push('">');
+    html.push('<div class="inner-w-img">');
+    html.push('<span>');
+    html.push('<strong><a href="http://mobile.twitter.com/' + screen_name + '">' + screen_name + '</a></strong> ');
+    html.push('<span class="status">' + this.ify.clean(tweet.text) + '</span>');
+    html.push('</span>');
+    html.push('<div class="list-tweet-status">');
+    html.push('<a href="http://mobile.twitter.com/' + screen_name + '/status/' + tweet.id + '" class="status_link">' + this.time.datetime(tweet.created_at) + '</a>');
+    html.push('</div>');
+    html.push('</div>');
+    html.push('</div>');
+
+    return html.join('');
+  };
+
+  if (window.navigator.standalone == true) {
+    $('body').addClass('fullscreen');
+  }
+
+  $(document).on('orientationchange', function () {
+    $('body').removeClass('portrait').removeClass('landscape').addClass(window.innerWidth < window.innerHeight ? 'portrait' : 'landscape');
+  }.runReturn());
+
+  var scroller = new iScroll(document.getElementById('results-inner'), 'y');
+
+  setTimeout(function () {
+    window.scrollTo(0, 1); // 90);
+  }, 10);
+  
+  var last = 1;
+  setInterval(function () {
+    var top = window.scrollY;
+    if (top == 0 && top != last) {
+      if (window.navigator.standalone == true) {
+        top = 1; 
+        window.scrollTo(0, 1);
+      } 
+      scroller.scrollTo(0, 0);
+    }
+    last = top;
+  }, 10);
+  
+  $.fn.val = function (v) {
+    return v == undefined ? 
+      this.elements.length ? this.elements[0].value || '' : '' :
+      this.each(function (el) {
+        el.value = v;
+      });
+  };
+  
+  $.fn.serialize = function () {
+    var serialize = [];
+    this.find('input,select').each(function (el) {
+      var v = el.value || '';
+      if (v != '') {
+        if (el.name) {
+          serialize.push(el.name + '=' + v);
+        }
+      }
+    });
+    return serialize.join('&');
+  };
+  
+  $.fn.append = function (html) {
+    return this.html('bottom', html);
+  };
+  
+  $.fn.get = function (i) {
+    return this.elements[i];
+  };
+  
+  $.fn.filter = function (fn) {
+    var elements = [];
+    this.elements.forEach(function (el, i) {
+      if (fn.call(el, i, el)) {
+        elements.push(el);
+      }
+    });
+    this.elements = elements;
+    return this;
+  };
+  
+  $.fn.last = function () {
+    var that = this;
+    return this.filter(function (i) {
+      return i == that.elements.length - 1;
+    });
+  };
+  
+  $.fn.first = function () {
+    return this.filter(function (i) {
+      return i == 0;
+    });    
+  };
+  
+  $.fn.replaceWith = function (html) {
+    return this.each(function (el) {
+      $(el).html('after', html).html('remove');      
+    });
+  };
+  
+  var state = '';
+  
+  $('form').on('submit', function (e) {
+    e.preventDefault();
+    screen_name = $('#term').val();
+
+    var newstate = $(this).serialize(),
+        type = $('#type').val(),
+        search = $('#search').val(),
+        filter = twitterlib.filter.format(search);
+
+    if (state != newstate) {
+      state = newstate;
+      store.set('term', screen_name);
+
+      if (screen_name.match(/\//)) {
+        type = 'list';
+      }
+
+      total_tweets = 0;
+      total_searched = 0;
+      $tweets.html('');
+
+      $tweets.append('<div class="list-tweet first list-firsttweet searchterm">Searching <em><strong>' + screen_name + '</strong>&rsquo;s ' + type_string[type] + '</em> for <strong>' + search.replace(/<>/g, function (m) { return m == '<' ? '&lt;' : '&gt;'; }) + '</strong></div>');
+      $('body').addClass('results').addClass('loading');
+
+      // need a way to cancel all outstanding API requests - bespoke $.getJSONP on it's way!
+      twitterlib.cancel()[type](screen_name, { filter: search }, function (data, options) {
+        total_searched += options.originalTweets.length;
+
+        // if there's no results, do another call - and keep going until we hit something
+        if (data.length == 0 && total_tweets == 0 && options.originalTweets.length == 0) {
+          $('#status p').first().text('Searched ' + total_searched + ' tweets, found nothing.');
+        } else if (data.length == 0 && total_tweets == 0) {
+          setTimeout(function () {
+            twitterlib.next();
+          }, 2000);
+          return;
+        }
+        
+        if (total_tweets) {
+          $tweets.find('div.list-tweet').last().addClass('more'); // hard split line
+        }
+        $tweets = $('#content');
+
+        var i = 0, j = 0, t, r, scrollPos = null, searches = filter.and.concat(filter.or).join('|'), $lastTweet;
+
+        for (i = 0; i < data.length; i++) {
+          t = twitterlib.render(data[i], false);
+          $tweets.append(t);
+          
+          // $lastTweet = $($tweets.get($('#contents div.list-tweet').elements.length - 1));
+          $lastTweet = $('#content div.list-tweet').last();
+
+          if (total_tweets == 0 && i == 0) {
+            $lastTweet.addClass('first');
+          } 
+          
+          // really tricky code here, we're finding *this* and all nested text nodes
+          // then replacing them with our new <strong>text</strong> elements
+          $lastTweet.find('span.status').each(function (el) {
+            var elements = [], i, l = el.childNodes.length;
+            for (i = 0; i < l; i++) {
+              if (el.childNodes[i].nodeName == '#text') elements.push(el.childNodes[i]);
+            }
+            this.elements = elements;
+            return this;
+          }).each(function (el) {
+            // ignore blank lines
+            // make matches bold
+            var change = '';
+            if (/[^\s]/.test(el.nodeValue)) {
+              // encoding of entities happens here, so we need to reverse back out
+              change = el.nodeValue.replace(/[<>&]/g, function (m) {
+                var r = '&amp;';
+                if (m == '<') {
+                  r = '&lt;';
+                } else if (m == '>') {
+                  r = '&gt;';
+                }
+                return r;
+              }).replace(new RegExp('(' + searches + ')', "gi"), "<strong>$1</strong>");
+              // need to convert this textNode to tags and text
+              $(el).replaceWith(change);
+            }
+          });
+
+        }
+
+        total_tweets += data.length;
+
+        // if (options.originalTweets.length) $('#status').html('<p>Found ' + total_tweets + ' tweet' + (total_tweets == 1 ? '' : 's') + '.</p><p>Read to: <strong>' + twitterlib.time.datetime(options.originalTweets[options.originalTweets.length - 1].created_at).replace(/ (AM|PM)/, function (a, m) { return m.toLowerCase() + ','; }) + '</strong></p>');
+        
+        $('body').removeClass('loading');
+        setTimeout(function () {
+          scroller.refresh();
+          window.scrollTo(0, 90);
+        }, 10);
+
+
+        // if (statusTop == null) {
+        //   statusTop = $('#tweets aside').offset().top - parseFloat($('#tweets aside').css('margin-top').replace(/auto/, 0));            
+        // }
+
+      });
+
+    } else {
+      // $('#status').html('<p>Searched ' + total_searched + ' tweets.</p><p>Requesting more...</p>');
+      $('body').addClass('loading');
+
+      setTimeout(function () { twitterlib.cancel().next(); }, 250);
+    } 
+  });
+  
+  $('#term').val(store.get('term'));
+  
+})(xui);
+
+</script>
+</body>
+</html>

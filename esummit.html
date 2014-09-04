@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Concetto</title>
+<link rel="stylesheet" type="text/css" href="css/iframe-style.css" />
+
+<!--[if IE]>
+
+<style type="text/css">
+body
+{
+	background: url(img/dark-grid.png);
+}
+</style>
+
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"> </script>
+<script type="text/javascript">
+var curr = 0;
+var total = 3;
+var elemWidth;
+$(document).ready(function() {
+	var heads = document.getElementsByTagName('h1');
+	var h = heads[0];
+	var hnew = "";
+	for(var i = 0; i < h.innerHTML.length; i++)
+		hnew += "<span>"+h.innerHTML.charAt(i)+"</span>";
+	h.innerHTML = hnew;
+	glowText(0);
+	
+	showTiles(0);
+});
+
+function showTiles(curr)
+{
+	if(curr < $(".tiles li").length)
+	{
+		$(".tiles li:eq("+curr+")").fadeIn(2500);
+		setTimeout("showTiles("+(curr+1)+")", 200);
+	}
+}
+
+function glowText(i)
+{
+	var l = $('h1 span').length;
+	$('h1 span:eq('+((i + l - 3)%l)+')').attr('class', '');
+	$('h1 span:eq('+(i-2)+')').attr('class', 'glow');
+	$('h1 span:eq('+(i-1)+')').attr('class', 'glow');
+	$('h1 span:eq('+(i)+')').attr('class', 'glow');
+	setTimeout("glowText("+((i+1)%(l+6))+")", 125);
+}
+</script>
+
+</head>
+
+<body>
+<h1>E Summit</h1>
+<div id="container">
+<center>
+<ul class="tiles">
+
+<li>
+<a href="bizcraft.html">Bizkraft</a>
+</li>
+
+<li>
+<a href="internfair.html">Intern Fair</a>
+</li>
+
+<li>
+<a href="ebazaar.html">E-Bazaar</a>
+</li>
+
+
+<li>
+<a href="businessbaazigar.html">Business Baazigar</a>
+</li>
+
+<li>
+<a href="chankyasdilemma.html">Chankya's Dilemma</a>
+</li>
+
+
+</ul>
+</center>
+</div>
+</body>
+</html>

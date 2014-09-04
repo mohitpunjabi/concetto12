@@ -1,0 +1,215 @@
+@charset "utf-8";
+
+a:active
+{
+	color: #FFF;
+	text-decoration: none;
+	text-shadow: -2px -2px 0px #000;
+}
+
+a
+{
+	color: #FFF;
+	text-decoration: none;
+	text-shadow: 2px 2px 0px #000;
+}
+
+a:hover
+{
+	color: #CCC;
+	text-shadow: 2px 2px 0px #000;
+}
+
+body
+{
+	margin: 0px;
+	padding: 0px;
+	font-size: 1em;
+	font-weight: 600;
+	color: #FFF;
+}
+
+body
+{
+	margin: 0;
+	padding: 0;
+	font-family: "Courier New", Courier, monospace;
+	color: #FFF;
+	overflow: hidden;
+}
+
+#header
+{
+	color: #01235E;
+	background: rgba(255, 255, 255, 0.9);
+	padding: 5px;
+	border: 1px #33F dashed;
+	border-top: 0px;
+	position: relative;
+	width: 1000px;
+	height: 150px;
+	z-index: 15;
+	border-radius: 0px 0px 10px 10px;
+	-webkit-transition: top 0.5s, opacity 0.5s;
+	-moz-transition: top 0.5s, opacity 0.5s;
+	-o-transition: top 0.5s, opacity 0.5s;
+	transition: top 0.5s, opacity 0.5s;
+}
+
+#header a
+{
+	border: 0px;
+	color: #01235E;
+	text-shadow: none;
+}
+
+#header a:hover
+{
+	border: 0px;
+	color: #00A;
+}
+
+#header-wrapper
+{
+	position: absolute;
+	z-index: 20;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 150px;
+	text-align: center;
+}
+#header #logo-big
+{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 739px;
+	height: 150px;
+	background: url(../img/logobig.png) 0 0 no-repeat;
+}
+
+#header #show-button
+{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	bottom: 0px;
+}
+
+#header #logo-small
+{
+	position: absolute;
+	bottom: 10px;
+	left: 15px;
+	width: 310px;
+	height: 40px;
+	background: url(../img/logo.png) no-repeat;
+}
+
+@font-face
+{
+	font-family: lane;
+	src: url('lane.ttf') format("truetype"); /* IE */
+}
+
+
+#header #imp-links
+{
+	position: absolute;
+	bottom: 5px;
+	right: 10px;
+	padding: 5px;
+	border-left: 0px;
+	border-right: 0px;
+	font-family: lane, "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 22px;
+}
+
+#header #other-links
+{
+	color: #01235F;
+	position: absolute;
+	top: 3px;
+	right: 15px;
+	font-family: lane, "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 20px;
+}
+
+
+.center
+{
+	text-align: center;
+}
+
+.center a
+{
+	display: block;
+}
+
+#container
+{
+	height: 100%;
+}
+
+#theatre
+{
+	display: none;
+	background-color: transparent;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 25;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#theatreBackground
+{
+	background: url(../img/dark-grid.png);
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	min-width: 1000px;
+	z-index: -1;
+}
+
+#theatreFrame
+{
+	height: 100%;
+	min-width: 1000px;
+	width: 1000px;
+	z-index: 25;
+	overflow: auto;
+	border: 0px;
+	background: rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 10px #000;
+}
+
+#theatreBackButton
+{
+	float: right;
+	margin: 5px;
+	padding: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-shadow: none;
+	font-weight: 900;
+	font-size: 0.9em;
+	color: #FFF;
+	display: block;
+	height: 15px;
+	width: 15px;
+	background: #000;
+}
+
+#theatreBackButton:hover
+{
+	border: 1px #000 solid;
+	box-shadow: 0px 0px 3px #000;
+}

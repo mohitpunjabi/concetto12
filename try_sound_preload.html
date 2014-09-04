@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/marioanimations.js"> </script>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"> </script>
+<script type="text/javascript" src="soundmanager2/script/soundmanager2-jsmin.js"> </script>
+
+<title>Untitled Document</title>
+</head>
+
+<body>
+
+<div id="icon">
+Loading Sounds...
+</div>
+
+</body>
+
+<script type="text/javascript">
+var m = "mohit";
+
+soundManager.setup({
+	url: './soundmanager2/swf/',
+	flashVersion: 9,
+	useHighPerformance: true,
+	flashLoadTimeout: 1000,
+	useHTML5Audio: true,
+	waitForWindowLoad: false,
+	
+	onready: function() {
+		var sounds = ['smb_coin', 'smb_1-up', 'mario_08', 'smb_jump-super', 'smb_underworld'];
+		var i;
+		
+		for(i = 0; i < sounds.length; i++)
+		{
+			var preload = soundManager.createSound({
+				id: sounds[i],
+				url: './sound/'+sounds[i]+'.wav',
+				onload: function() {
+					$("#icon").html($("#icon").html()+"<button onclick=\"javascript:soundManager.play('"+this.id+"')\">"+m+"</button>");
+				}
+			});
+			preload.load();
+		}
+	}
+});
+
+
+</script>
+
+</html>

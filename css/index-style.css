@@ -1,0 +1,102 @@
+@charset "utf-8";
+/* CSS Document */
+
+.background, #container
+{
+	background-color: #8484FF;
+	-webkit-transition: background-color 5s;
+}
+
+#container
+{
+	height: 100%;
+}
+
+#mario-container
+{
+	height: 700px;
+	width: 100%;
+}
+
+ul li.selected
+{
+	list-style-image: url(../img/mushroom.png);
+}
+
+ul li
+{
+	list-style-image: none;
+}
+
+ul
+{
+	list-style-type: none;
+	width: 100%;
+}
+ul li
+{
+	padding: 0px;
+	padding-left: 10px;
+	padding-bottom: 15px;
+}
+
+.concettoHeader
+{
+	background: url(../img/concetto.png) no-repeat;
+	-webkit-transition: background 1s;
+}
+
+.castle
+{
+	background: url(../img/castle.png);
+}
+
+.tunnelhor
+{
+	background: url(../img/tunnelhor.png) no-repeat;
+	z-index: 11;
+}
+
+#theatreFrame
+{
+	background: rgba(0, 0, 0, 0.8);
+}
+
+@font-face
+{
+	font-family: lane;
+	src: url('lane.ttf') format("truetype"); /* IE */
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	font-family: lane, "Trebuchet MS", Arial, Helvetica, sans-serif !important;
+}
+
+
+h3
+{
+	padding-top: 10px;
+	padding-left: 20px;
+	font-size: 25px;
+}
+h1
+{
+	top: 0px;
+	width: 100%;
+	text-align: center;
+	padding: 0px;
+	margin: 0px;
+	padding-bottom: 20px;
+	font-weight: 300;
+	font-size: 100px;
+	color: #9FF;
+	text-shadow: 0px 0px 5px #9FF, 0px 0px 10px #9FF;
+}
+
+#theatreFrame button
+{
+	padding: 10px;
+	font-size: 25px;
+	font-family: lane, "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
