@@ -9,4 +9,4 @@ Mario and all other characters used in this website are copyright of Nintendo. T
 
 A working version (in Chrome and Firefox)
 -----------
-[Visit this page](http://mohitpunjabi.com/concetto12) to view a working example. This (buggy) version only works in Chrome.
+[Visit this page](http://concetto12.mohitpunjabi.com/) to view a working example. This (buggy) version only works in Chrome.
